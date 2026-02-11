@@ -6,6 +6,8 @@
     <title>消防排煙速算計算機 測試版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 引入 Busuanzi 計數器腳本 -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; }
@@ -27,15 +29,21 @@
                     <i class="fa-solid fa-helmet-safety"></i> 
                     消防排煙速算計算機
                 </h1>
-                <p class="text-xs text-blue-300 ml-8 font-medium tracking-wide flex items-center gap-2">
-                    (設計者: 吳啓仲)
-                    <!-- 信箱聯絡按鈕 -->
-                    <a href="mailto:0922693981ab11@gmail.com" class="hover:text-white transition-colors" title="有問題請寄信給我">
-                        <i class="fa-solid fa-envelope"></i>
-                    </a>
-                </p>
+                <div class="ml-8">
+                    <p class="text-xs text-blue-300 font-medium tracking-wide flex items-center gap-2">
+                        (設計者: 吳啓仲)
+                        <a href="mailto:0922693981ab11@gmail.com" class="hover:text-white transition-colors" title="有問題請寄信給我">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </p>
+                    <!-- 計數器顯示區 -->
+                    <p class="text-[10px] text-blue-400 mt-1 flex items-center gap-1" title="不重複訪客數">
+                        <i class="fa-solid fa-users"></i> 
+                        使用人數: <span id="busuanzi_value_site_uv" class="font-bold text-white">--</span>
+                    </p>
+                </div>
             </div>
-            <span class="text-xs bg-blue-700 px-2 py-1 rounded text-blue-100">Ver 3.4</span>
+            <span class="text-xs bg-blue-700 px-2 py-1 rounded text-blue-100">Ver 3.5</span>
         </div>
     </div>
 
@@ -415,6 +423,7 @@
         let ductList = [];
 
         function getGauge(sizeCm) {
+            // sizeCm is the max dimension of W or H
             const sizeMm = sizeCm * 10;
             if (sizeMm <= 750) return "#26~#24 (0.5/0.6)";
             if (sizeMm <= 1500) return "#22 (0.8)";
